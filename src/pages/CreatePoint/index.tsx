@@ -40,7 +40,7 @@ const CreatePoint = () => {
   });
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedFile, setSelectedFile] = useState<File>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
