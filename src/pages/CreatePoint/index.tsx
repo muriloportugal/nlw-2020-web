@@ -151,8 +151,7 @@ const CreatePoint = () => {
     }
 
     api.post('points', data)
-    .then(response =>{
-      console.log(response);  
+    .then(response =>{  
       setLoading(false);
       alert('Ponto de coleta criado');
       history.push('/');
@@ -274,16 +273,15 @@ const CreatePoint = () => {
           </legend>
 
           <ul className="items-grid">
+                <li>
+                  <img src='https://nwl-2020-server.herokuapp.com/uploads/lampadas.svg' alt='lampada'/>
+                  <span>Lampada</span>
+                </li>
             {items.map(item => {
               console.log(item);
               return (
-                // para poder enviar um parâmetro para a função precisa colocar
-                // a mesma como sendo chamada por outra função, nesse caso uma
-                // arrowfunction que chama handleSelectItem e esta recebe o id do item
                 <li
                   key={item.id}
-                  onClick={() => handleSelectItem(item.id)}
-                  className={selectedItems.includes(item.id) ? 'selected' : ''}
                 >
                   <img src={item.image_url} alt={item.title}/>
                   <span>{item.title}</span>
