@@ -60,6 +60,11 @@ const CreatePoint = () => {
   
   // Busca os itens que podem ser reciclados e suas imagens
   useEffect(() => {
+    setItems([{
+      id: 0,
+      title: 'Óleo de Cozinha',
+      image_url: 'https://nwl-2020-server.herokuapp.com/uploads/oleo.svg',
+    }]);
     api.get('/items').then(response => {
       setItems(response.data);
     })
