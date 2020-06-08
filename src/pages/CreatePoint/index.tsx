@@ -270,6 +270,7 @@ const CreatePoint = () => {
 
           <ul className="items-grid">
             {items.map(item => {
+              console.log(item);
               return (
                 // para poder enviar um parâmetro para a função precisa colocar
                 // a mesma como sendo chamada por outra função, nesse caso uma
