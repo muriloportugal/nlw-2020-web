@@ -273,15 +273,13 @@ const CreatePoint = () => {
           </legend>
 
           <ul className="items-grid">
-                <li>
-                  <img src='https://nwl-2020-server.herokuapp.com/uploads/lampadas.svg' alt='lampada'/>
-                  <span>Lampada</span>
-                </li>
             {items.map(item => {
               console.log(item);
               return (
                 <li
                   key={item.id}
+                  onClick={() => handleSelectItem(item.id)}
+                  className={selectedItems.includes(item.id) ? 'selected' : ''}
                 >
                   <img src={item.image_url} alt={item.title}/>
                   <span>{item.title}</span>
