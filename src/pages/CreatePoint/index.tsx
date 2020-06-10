@@ -32,7 +32,7 @@ const CreatePoint = () => {
   const [cities, setCities] = useState<string[]>([])
   const [selectedCity, setSelectedCity] = useState('0');
   const [selectedPosition, setSelectedPosition] = useState<[number,number]>([0,0]);
-  const [initialPosition, setInitialPosition] = useState<[number,number]>([0,0]);
+  const [initialPosition, setInitialPosition] = useState<[number,number]>([-23.5682032,-46.7194634]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,30 +44,25 @@ const CreatePoint = () => {
 
   const history = useHistory();
 
+    // Busca os itens que podem ser reciclados e suas imagens
+    useEffect(() => {
+      api.get('/items').then(response => {
+        setItems(response.data);
+      }).catch(error => console.log(`Erro ao buscar itens recicláveis ${error}`));
+    }, []);
+
   // Busca localização
   useEffect(() => {
-    // Fazendo a chamada na api de geolocation da mozzila,
-    // se utilizar o navigator.geolocation.getCurrentPosition()
-    // ele vai tentar pegar da api do google, que agora é necessário uma
-    // Key para que possa utilizar, e por isso no firefox o mapa nao iria funcionar
-    axios.get('https://location.services.mozilla.com/v1/geolocate?key=test')
-      .then(position => {
-        const { lat, lng } = position.data.location;
-        setInitialPosition([lat,lng]); 
-      })
-      .catch(error => console.log(error));
-  }, []);
-  
-  // Busca os itens que podem ser reciclados e suas imagens
-  useEffect(() => {
-    setItems([{
-      id: 0,
-      title: 'Óleo de Cozinha',
-      image_url: 'https://nwl-2020-server.herokuapp.com/uploads/oleo.svg',
-    }]);
-    api.get('/items').then(response => {
-      setItems(response.data);
-    })
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setInitialPosition([latitude,longitude]);
+      },
+      error => {
+        console.log(`Erro ao tentar buscar geolocalização ${error.message}`);
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
   }, []);
 
   // Busca todos os estados da api do IBGE
@@ -76,8 +71,7 @@ const CreatePoint = () => {
       .then(response => {
         const ufInitials = response.data.map(uf => uf.sigla);
         setUfs(ufInitials);
-
-      });
+      }).catch(error => console.log(`Erro ao buscar UF IBGE ${error}`));
   }, []);
 
   // Busca todas as cidades referente ao estado que o usuário selecionou
@@ -89,7 +83,7 @@ const CreatePoint = () => {
       .then(response => {
         const cityNames = response.data.map(city => city.nome);
         setCities(cityNames);
-      });
+      }).catch(error => console.log(`Erro ao buscar cidades IBGE ${error}`));
   }, [selectedUf]);
 
   function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
@@ -155,6 +149,10 @@ const CreatePoint = () => {
       setLoading(false);
       alert('Ponto de coleta criado');
       history.push('/');
+    })
+    .catch(error => {
+      setLoading(false);
+      alert(`Erro ao tentar criar ponto de coleta.\n${JSON.stringify(error.response.data)}`)
     });
     
     
@@ -205,7 +203,7 @@ const CreatePoint = () => {
             <div className="field">
               <label htmlFor="name">Whatsapp</label>
               <input
-                type="text"
+                type="number"
                 name="whatsapp"
                 id="whatsapp"
                 onChange={handleInputChange}
@@ -221,7 +219,7 @@ const CreatePoint = () => {
             <span>Selecione o endereço no mapa</span>
           </legend>
 
-          <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
+          <Map center={initialPosition} zoom={11} onClick={handleMapClick}>
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -274,7 +272,6 @@ const CreatePoint = () => {
 
           <ul className="items-grid">
             {items.map(item => {
-              console.log(item);
               return (
                 <li
                   key={item.id}
