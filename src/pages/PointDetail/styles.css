@@ -1,0 +1,68 @@
+#page-point-detail {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+}
+
+#page-point-detail header {
+  margin-top: 48px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#page-point-detail header a {
+  color: var(--title-color);
+  font-weight: bold;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+}
+
+#page-point-detail header a svg {
+  margin-right: 16px;
+  color: var(--primary-color);
+}
+
+#page-point-detail .content {
+  margin: 80px auto;
+  padding: 64px;
+  max-width: 730px;
+  background: #FFF;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#page-point-detail .content h1 {
+  font-size: 36px;
+  margin-top: 40px;
+}
+
+#page-point-detail .dados {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-right: 5px;
+}
+
+
+
+#page-point-detail .dados h2 {
+  font-size: 24px;
+  margin-top: 25px;
+}
+
+
+
+#page-point-detail .content img {
+  border-radius: 10%;
+  max-height: 800px;
+  max-width: 600px;
+}

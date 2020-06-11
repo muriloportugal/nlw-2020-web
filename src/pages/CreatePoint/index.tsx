@@ -181,31 +181,34 @@ const CreatePoint = () => {
           </legend>
           
           <div className="field">
-            <label htmlFor="name">Nome da entidade</label>
+            <label htmlFor="name">Nome da entidade (Obrigatório)</label>
             <input
               type="text"
               name="name"
               id="name"
+              required={true}
               onChange={handleInputChange}
             />
           </div>
 
           <div className="field-group">
             <div className="field">
-              <label htmlFor="email">E-mail</label>
+              <label htmlFor="email">E-mail (Obrigatório)</label>
               <input
                 type="email"
                 name="email"
                 id="email"
+                required={true}
                 onChange={handleInputChange}
               />
             </div>
             <div className="field">
-              <label htmlFor="name">Whatsapp</label>
+              <label htmlFor="name">Whatsapp (Obrigatório)</label>
               <input
                 type="number"
                 name="whatsapp"
                 id="whatsapp"
+                required={true}
                 onChange={handleInputChange}
               />
             </div>
@@ -216,7 +219,7 @@ const CreatePoint = () => {
         <fieldset>
           <legend>
             <h2>Endereço</h2>
-            <span>Selecione o endereço no mapa</span>
+            <span>Selecione o endereço no mapa (Obrigatório)</span>
           </legend>
 
           <Map center={initialPosition} zoom={11} onClick={handleMapClick}>
@@ -229,14 +232,15 @@ const CreatePoint = () => {
 
           <div className="field-group">
             <div className="field">
-              <label htmlFor="uf">Estado (UF)</label>
+              <label htmlFor="uf">Estado (UF) (Obrigatório)</label>
               <select
                 name="uf"
                 id="uf"
                 value={selectedUf}
+                required={true}
                 onChange={handleSelectUf}
               >
-                <option value="0">Selecione uma UF</option>
+                <option value="">Selecione uma UF</option>
                 {ufs.map(uf => {
                   return (
                     <option key={uf} value={uf}>{uf}</option>
@@ -245,14 +249,15 @@ const CreatePoint = () => {
                </select>
              </div>
              <div className="field">
-              <label htmlFor="city">Cidade</label>
+              <label htmlFor="city">Cidade (Obrigatório)</label>
               <select 
                 name="city"
                 id="city"
                 value={selectedCity}
+                required={true}
                 onChange={handleSelectCity}
               >
-                <option value="0">Selecione uma Cidade</option>
+                <option value="">Selecione uma Cidade </option>
                   {cities.map(city => {
                    return (
                     <option value={city} key={city}>{city}</option>
@@ -267,7 +272,7 @@ const CreatePoint = () => {
         <fieldset>
           <legend>
             <h2>Ítens de Coleta</h2>
-            <span>Selecione um ou mais itens abaixo</span>
+            <span>Selecione um ou mais itens abaixo (Obrigatório)</span>
           </legend>
 
           <ul className="items-grid">
