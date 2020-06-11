@@ -48,7 +48,10 @@ const CreatePoint = () => {
     useEffect(() => {
       api.get('/items').then(response => {
         setItems(response.data);
-      }).catch(error => console.log(`Erro ao buscar itens recicláveis ${error}`));
+        
+      }).catch(error => {
+        console.log(`Erro ao buscar itens recicláveis ${error}`);
+      });
     }, []);
 
   // Busca localização

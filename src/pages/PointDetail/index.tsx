@@ -36,7 +36,6 @@ const PointDetail: React.FC = () => {
       api.get(`/points/${params.id}`)
         .then(response => {
           setData(response.data);
-          console.log(response.data);
         })
         .catch(error => {
           console.log(`Erro ao tentar buscar ponto ${error}`);
