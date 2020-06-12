@@ -54,6 +54,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 #page-create-point form legend h2 {
@@ -70,11 +71,18 @@
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  margin-left: -24px;
+
+}
+
+#page-create-point form .field-group .field {
+
+  margin-left: 24px;
 }
 
 #page-create-point form .field {
   flex: 1;
-
+  
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
@@ -118,13 +126,13 @@
   cursor: not-allowed;
 }
 
-#page-create-point form .field-group .field + .field {
+/* #page-create-point form .field-group .field + .field {
   margin-left: 24px;
-}
+} */
 
-#page-create-point form .field-group input + input {
+/* #page-create-point form .field-group input + input {
   margin-left: 24px;
-}
+} */
 
 #page-create-point form .field-check {
   flex-direction: row;

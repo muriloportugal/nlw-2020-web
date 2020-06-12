@@ -54,6 +54,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 #page-find-point .content legend h2 {
@@ -69,27 +70,22 @@
 #page-find-point .content .field-group {
   flex: 1;
   display: flex;
+  flex-wrap: wrap;
+  margin-left: -24px;
+  ;
 }
 
 #page-find-point .content .field {
   flex: 1;
-
+  margin-left: 24px;
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+  /* margin-right: 10px; */
+  align-content: space-around;
+  
 }
 
-#page-find-point .content .field input[type=text],
-#page-find-point .content .field input[type=email],
-#page-find-point .content .field input[type=number] {
-  flex: 1;
-  background: #F0F0F5;
-  border-radius: 8px;
-  border: 0;
-  padding: 16px 24px;
-  font-size: 16px;
-  color: #6C6C80;
-}
 
 #page-find-point .content .field select {
   -webkit-appearance: none;
@@ -117,13 +113,9 @@
   cursor: not-allowed;
 }
 
-#page-find-point .content .field-group .field + .field {
+/* #page-find-point .content .field-group .field + .field {
   margin-left: 24px;
-}
-
-#page-find-point .content .field-group input + input {
-  margin-left: 24px;
-}
+} */
 
 #page-find-point .content .field-check {
   flex-direction: row;
