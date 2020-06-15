@@ -89,6 +89,25 @@ const CreatePoint = () => {
       }).catch(error => console.log(`Erro ao buscar cidades IBGE ${error}`));
   }, [selectedUf]);
 
+  // Busca latitude longitude para posicionar o mapa na cidade selecionada
+  useEffect(() => {
+    if(selectedCity !== '0'){
+      const parsedCity = selectedCity.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      api.get('/location',{
+        params: {
+          city: parsedCity,
+          uf: selectedUf
+        }
+      }).then(result => {
+        const cityLocation = result.data[0];
+        if(cityLocation){
+          if(cityLocation.city === selectedCity)
+          setInitialPosition(cityLocation.location);
+        }
+      });
+    }    
+  }, [cities, selectedUf, selectedCity])
+
   function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
     const uf = event.target.value;
     setSelectedUf(uf);
